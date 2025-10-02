@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <mexal_config>
+            <chiamata_articoli_ricerca>
+                <numero_giorni>3</numero_giorni>
+            </chiamata_articoli_ricerca>
+            <chiamata_generale_articoli>
+                <numero_giorni>3</numero_giorni>
+            </chiamata_generale_articoli>
+        </mexal_config>
+    </default>
+</config>

@@ -1,0 +1,135 @@
+<?php // report product
+$prodotti_collection = $block->getProdottiCollection();
+$prodottiAggiornataCount = $block->getProdottiAggiornataCount();
+$isImportProductEnabled = $block->isImportProductEnabled();
+$buttonProductColor = $isImportProductEnabled ? 'green' : 'red';
+?>
+<style>
+table, th, td {
+  border: 1px solid black;
+  padding:10px;
+}
+<?php if ($isImportProductEnabled): ?>
+	button.importa-prodotto {
+		background-color: <?= $buttonProductColor ?>;
+		color: white;
+	}
+<?php endif; ?>
+</style>
+
+<div class="admin__data-grid-wrap">
+    <h2>Prodotti Importati Report
+			<?php if (!$isImportProductEnabled): ?>
+				<span style="color:red;">(Disabilitato!)</span>
+			<?php endif; ?>
+    </h2>    
+    
+	<p>Totale record aggiornati: <?= $prodottiAggiornataCount ?></p>
+	<p>Elenco ultimi prodotti sincronizzati</p>
+	<p>
+	<table>
+		  <thead>
+		      <tr>
+		          <th>ID</th>
+		          <th>Entity ID Old</th>
+		          <th>Entity ID New</th>
+		          <th>SKU</th>
+		          <th>Descr. breve</th>
+		          <th>Aggiornata</th>
+		      </tr>
+		  </thead>
+		  <tbody>
+		      <?php foreach ($prodotti_collection as $item): ?>
+		          <tr>
+		              <td><?= $item->getId() ?></td>
+		              <td><?= $item->getEntityIdOld() ?></td>
+		              <td><?= $item->getEntityIdNew() ?></td>
+		              <td><?= $item->getSku() ?></td>
+		              <td><?= $item->getShortDescription() ?></td>
+		              <td><?= $item->getAggiornata() ?></td>
+		          </tr>
+		      <?php endforeach; ?>
+		  </tbody>
+	</table>
+	</p>
+	<p>
+	<button type="button" class="importa-prodotto" onclick="setLocation('<?php echo $this->getUrl('lm_importmagold/report/importProdotto'); ?>')">Importa Prodotto</button>
+	<button type="button" onclick="setLocation('<?php echo $this->getUrl('lm_importmagold/report/resetimportProdotti'); ?>')">Ricomincia Import Prodotti da inizio</button>
+	</p>
+	
+</div>
+
+
+
+
+
+
+<?php // report customer
+$collection = $block->getCustomerCollection();
+$aggiornataCount = $block->getCustomerAggiornataCount();
+$isImportCustomerEnabled = $block->isImportCustomerEnabled();
+$buttonCustomerColor = $isImportCustomerEnabled ? 'green' : 'red';
+?>
+<style>
+table, th, td {
+  border: 1px solid black;
+  padding:10px;
+}
+<?php if ($isImportCustomerEnabled): ?>
+	button.importa-cliente {
+		background-color: <?= $buttonCustomerColor ?>;
+		color: white;
+	}
+<?php endif; ?>
+</style>
+
+<div class="admin__data-grid-wrap">
+    <h2>Clienti Importati Report
+			<?php if (!$isImportCustomerEnabled): ?>
+				<span style="color:red;">(Disabilitato!)</span>
+			<?php endif; ?>
+    </h2>
+    <!-- Aggiungi qui i pulsanti e i report 
+    <button type="button" onclick="setLocation('<?php echo $this->getUrl('lm_importmagold/report/runReport'); ?>')">Run Report</button>-->
+    
+    
+	<p>Totale record aggiornati: <?= $aggiornataCount ?></p>
+	<p>Elenco ultimi clienti sincronizzati</p>
+	<p>
+	<table>
+		  <thead>
+		      <tr>
+		          <th>ID</th>
+		          <th>Entity ID Old</th>
+		          <th>Entity ID New</th>
+		          <th>Email</th>
+		          <th>Aggiornata</th>
+		      </tr>
+		  </thead>
+		  <tbody>
+		      <?php foreach ($collection as $item): ?>
+		          <tr>
+		              <td><?= $item->getId() ?></td>
+		              <td><?= $item->getEntityIdOld() ?></td>
+		              <td><?= $item->getEntityIdNew() ?></td>
+		              <td><?= $item->getEmail() ?></td>
+		              <td><?= $item->getAggiornata() ?></td>
+		          </tr>
+		      <?php endforeach; ?>
+		  </tbody>
+	</table>
+	</p>
+	<p>
+	<button type="button" class="importa-cliente" onclick="setLocation('<?php echo $this->getUrl('lm_importmagold/report/importCliente'); ?>')">Importa Cliente</button>
+	<!--
+	<button type="button" onclick="setLocation('<?php echo $this->getUrl('lm_importmagold/report/runReport'); ?>')">Run Report (esempio json inutile)</button>
+	-->
+	<button type="button" onclick="setLocation('<?php echo $this->getUrl('lm_importmagold/report/resetimportClienti'); ?>')">Ricomincia Import Clienti da inizio</button>
+	</p>
+	
+</div>
+
+
+
+
+

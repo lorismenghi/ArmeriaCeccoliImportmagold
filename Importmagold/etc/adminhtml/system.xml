@@ -1,0 +1,689 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="lm_importmagold" translate="label" sortOrder="60">
+            <label>LM</label>
+        </tab>
+
+        
+        <section id="import_config" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Configurazione - Import M1->M2</label>
+            <tab>lm_importmagold</tab>
+            <resource>LM_Importmagold::import_config</resource>
+
+
+            <group id="customer" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configurazione import clienti M1->M2</label>
+                
+                <field id="enabled" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Abilitazione</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="product" translate="label" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configurazione import product M1->M2</label>
+                
+                <field id="enabled" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Abilitazione</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Aggiornamento di sola description e short_description</comment>
+                </field>
+            </group>
+
+            <group id="import_report" translate="label" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Report import M1->M2</label>
+                <field id="link" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link al Report</label>
+                    <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\Link</frontend_model>
+                </field>
+            </group>
+
+        </section>
+
+
+
+        <!-- Nuova sezione per Configurazione Mexal -->
+        <section id="mexal_config" translate="label" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Configurazione - Mexal</label>
+            <tab>lm_importmagold</tab>
+            <resource>LM_Importmagold::mexal_config</resource>
+
+            <group id="general" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configurazione generali Mexal</label>
+
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Abilitazione</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="enabled_sinc_product" translate="label comment" type="select" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Abilita sinc prodotti</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="enabled_sinc_product_terminale" translate="label comment" type="select" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Abilita sinc prodotti da terminale</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+               <!--
+                <field id="enabled_sinc_clienti" translate="label comment" type="select" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Abilita sinc clienti</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                -->
+                
+                <field id="base_api_url" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>BASE URL API Mexal</label>
+                    <comment>Inserisci il base URL per connettersi alle API di Mexal es. https://194.183.85.168:9004</comment>
+                </field>
+
+                <field id="api_key_authorization" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Chiave API key Authorization</label>
+                    <comment>Inserisci la chiave API di Autorizzazione Mexal</comment>
+                </field>
+                <!--
+                <field id="last_mag_order_id" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>ID ultimo ordine Magento inviato a Mexal</label>
+                    <comment>Inserisci id incrementale senza prefisso esempio: 52</comment>
+                </field>
+                -->
+                
+                <field id="last_mag_order_id" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>ID ultimo ordine Magento inviato a Mexal</label>
+                    <comment>Inserisci id incrementale senza prefisso esempio: 52</comment>
+                    <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LastOrderId</frontend_model>
+                </field>
+
+                
+                <field id="link_invio_ordine" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link invio ordine a Mexal</label>
+                    <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkInvioOrdine</frontend_model>
+                </field>
+
+                <field id="email_errore" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Email notifica errori</label>
+                    <comment>Email separate da virgola</comment>
+                </field>
+
+            </group>
+
+            <group id="chiamata_help" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Chiamata Help</label>
+
+                <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Key 1</label>
+                    <comment>Inserisci la chiave dell'header</comment>
+                </field>
+
+                <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Value 1</label>
+                    <comment>Inserisci il valore dell'header</comment>
+                </field>
+
+                <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>URL</label>
+                    <comment>Inserisci l'URL della chiamata es. /webapi/risorse/help</comment>
+                </field>
+
+                <field id="query_key_1" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Query Key 1</label>
+                    <comment>Inserisci la chiave della query string</comment>
+                </field>
+
+                <field id="query_value_1" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Query Value 1</label>
+                    <comment>Inserisci il valore della query string</comment>
+                </field>
+
+                <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link chiamata Help</label>
+                    <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalHelp</frontend_model>
+                </field>
+            </group>
+
+            <group id="chiamata_gruppi_merceologici" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Chiamata Gruppi Merceologici</label>
+
+                <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Key 1</label>
+                    <comment>Inserisci la chiave dell'header</comment>
+                </field>
+
+                <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Value 1</label>
+                    <comment>Inserisci il valore dell'header</comment>
+                </field>
+
+                <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>URL</label>
+                    <comment>Inserisci l'URL della chiamata</comment>
+                </field>
+
+                <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link chiamata Gruppi Merceologici</label>
+                    <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGruppiMerceologici</frontend_model>
+                </field>
+            </group>
+
+
+            <!-- Chiamata progressivi-articoli -->
+            <group id="chiamata_progressivi_articoli" translate="label" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Chiamata Progressivi Articoli (sku -> qta)</label>
+                <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Key 1</label>
+                    <comment>Inserisci la chiave dell'header</comment>
+                </field>
+
+                <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Value 1</label>
+                    <comment>Inserisci il valore dell'header</comment>
+                </field>
+
+                <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>URL</label>
+                    <comment>Inserisci l'URL della chiamata es. /webapi/risorse/progressivi-articoli</comment>
+                </field>
+                <!--
+                <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link chiamata Progressivi Articoli</label>
+                    <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalProgressiviArticoli</frontend_model>
+                </field>
+                -->
+            </group>
+
+            <!-- Chiamata articoli - ricerca -->
+            <group id="chiamata_articoli_ricerca" translate="label" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Chiamata Articoli - Ricerca (Prezzi e Qta)</label>
+                <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Key 1</label>
+                    <comment>Inserisci la chiave dell'header</comment>
+                </field>
+
+                <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Value 1</label>
+                    <comment>Inserisci il valore dell'header</comment>
+                </field>
+
+                <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>URL</label>
+                    <comment>Inserisci l'URL della chiamata es. /webapi/risorse/articoli/ricerca</comment>
+                </field>
+
+					     <field id="numero_giorni" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+						      <label>Numero di Giorni</label>
+						      <comment>Inserisci il numero di giorni</comment>
+					     </field>
+                <!--
+                <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link chiamata Articoli - Ricerca</label>
+                    <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalArticoliRicerca</frontend_model>
+                </field>
+                <field id="link_sinc_magento_prz_qta" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link sinc Magento Articoli Prezzo Qta</label>
+                    <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkSincMagPrzQta</frontend_model>
+                </field>
+                -->
+            </group>
+
+            <!-- Chiamata clienti - ricerca -->
+            <group id="chiamata_clienti_ricerca" translate="label" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Chiamata Clienti - Ricerca</label>
+                <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Key 1</label>
+                    <comment>Inserisci la chiave dell'header</comment>
+                </field>
+
+                <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Value 1</label>
+                    <comment>Inserisci il valore dell'header</comment>
+                </field>
+
+                <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>URL</label>
+                    <comment>Inserisci l'URL della chiamata es. /webapi/risorse/clienti/ricerca</comment>
+                </field>
+                <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link chiamata Clienti Ricerca</label>
+                    <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalClientiRicerca</frontend_model>
+                </field>
+                <field id="codice" translate="label comment" type="text" sortOrder="65" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Filtra per Codice Mexal</label>
+                </field>
+                <field id="nome" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Filtra per Nome</label>
+                </field>
+                <field id="cognome" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Filtra per Cognome</label>
+                </field>
+                <field id="email" translate="label comment" type="text" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Filtra per Email</label>
+                </field>
+
+
+            </group>
+
+            <!-- Chiamata clienti - invio -->
+            <group id="chiamata_clienti_invio" translate="label" sortOrder="175" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Chiamata Clienti - Invio</label>
+                <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Key 1</label>
+                    <comment>Inserisci la chiave dell'header</comment>
+                </field>
+
+                <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Value 1</label>
+                    <comment>Inserisci il valore dell'header</comment>
+                </field>
+
+                <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>URL</label>
+                    <comment>Inserisci l'URL della chiamata es. /webapi/risorse/clienti</comment>
+                </field>
+            </group>
+
+            <!-- Chiamata inserimento ordine cliente -->
+            <group id="chiamata_ordine_invio" translate="label" sortOrder="176" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Chiamata Ordine - Invio</label>
+                <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Key 1</label>
+                    <comment>Inserisci la chiave dell'header</comment>
+                </field>
+
+                <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Value 1</label>
+                    <comment>Inserisci il valore dell'header</comment>
+                </field>
+
+                <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>URL</label>
+                    <comment>Inserisci l'URL della chiamata es. /webapi/risorse/documenti/ordini-clienti</comment>
+                </field>
+            </group>
+
+				<group id="chiamata_generale_articoli" translate="label" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Articoli (Status e Attributi vari)</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@mydb1001/ricerca</comment>
+					 </field>
+
+					 <field id="numero_giorni" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Numero giorni</label>
+						  <comment>Giorni indietro recupero articoli aggiornati</comment>
+					 </field>
+          <!--
+					 <field id="sku" translate="label comment" type="text" sortOrder="41" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>SKU</label>
+						  <comment>Ignora giorni e cerca sku specifico</comment>
+					 </field>
+          -->
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Articoli</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneraleArticoli</frontend_model>
+					 </field>
+          <field id="link_sinc_magento_gen_prod" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>Link sinc Magento Articoli Attributi Generali</label>
+              <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkSincMagGenProd</frontend_model>
+          </field>
+				</group>
+
+				<group id="chiamata_generale_calibri" translate="label" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Calibri</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@calibri</comment>
+					 </field>
+
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Calibri</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneraleCalibri</frontend_model>
+					 </field>
+				</group>
+
+				<group id="chiamata_generale_altezza1" translate="label" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Altezza</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@altezza1</comment>
+					 </field>
+
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Altezza</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneraleAltezza1</frontend_model>
+					 </field>
+				</group>
+
+				<group id="chiamata_generale_compdies" translate="label" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Composizione</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@compdies</comment>
+					 </field>
+
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Composizione</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneraleCompdies</frontend_model>
+					 </field>
+				</group>
+
+				<group id="chiamata_generale_piomboar" translate="label" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Piombo</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@piomboar</comment>
+					 </field>
+
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Piombo</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneralePiomboar</frontend_model>
+					 </field>
+				</group>
+
+				<group id="chiamata_generale_colpiarm" translate="label" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Colpi</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@colpiarm</comment>
+					 </field>
+
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Colpi</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneraleColpiarm</frontend_model>
+					 </field>
+				</group>
+
+				<group id="chiamata_generale_fondello" translate="label" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Fondello</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@fondello</comment>
+					 </field>
+
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Fondello</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneraleFondello</frontend_model>
+					 </field>
+				</group>
+
+				<group id="chiamata_generale_stellear" translate="label" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Stelle</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@stellear</comment>
+					 </field>
+
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Stelle</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneraleStellear</frontend_model>
+					 </field>
+				</group>
+
+				<group id="chiamata_generale_diametro" translate="label" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Diametro</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@diametro</comment>
+					 </field>
+
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Diametro</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneraleDiametro</frontend_model>
+					 </field>
+				</group>
+
+				<group id="chiamata_generale_tagabbig" translate="label" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Taglia</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@tagabbig</comment>
+					 </field>
+
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Taglia</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneraleTagabbig</frontend_model>
+					 </field>
+				</group>
+
+				<group id="chiamata_generale_colorear" translate="label" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Colore</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@colorear</comment>
+					 </field>
+
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Colore</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneraleColorear</frontend_model>
+					 </field>
+				</group>
+
+				<group id="chiamata_generale_annoarme" translate="label" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Anno</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@annoarme</comment>
+					 </field>
+
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Anno</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneraleAnnoarme</frontend_model>
+					 </field>
+				</group>
+
+				<group id="chiamata_generale_material" translate="label" sortOrder="290" showInDefault="1" showInWebsite="1" showInStore="1">
+					 <label>Chiamata Generale Materiale</label>
+					 
+					 <field id="header_key_1" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Key 1</label>
+						  <comment>Inserisci la chiave dell'header</comment>
+					 </field>
+
+					 <field id="header_value_1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>Header Value 1</label>
+						  <comment>Inserisci il valore dell'header</comment>
+					 </field>
+
+					 <field id="url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+						  <label>URL</label>
+						  <comment>Inserisci l'URL della chiamata es. /webapi/risorse/mydb/203601GENERALE@material</comment>
+					 </field>
+
+					 <field id="link" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+						  <label>Link chiamata Generale Materiale</label>
+						  <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalGeneraleMaterial</frontend_model>
+					 </field>
+				</group>
+
+            <group id="mexal_report" translate="label" sortOrder="800" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Report sincronizzazione Mexal</label>
+                <field id="link" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link al Report</label>
+                    <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexal</frontend_model>
+                </field>
+
+                <field id="link_clear_cache" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Clear Cache</label>
+                    <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalClearCache</frontend_model>
+                </field>
+                <field id="link_rigenera_cache" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Rigenera Cache</label>
+                    <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\LinkMexalRigeneraCache</frontend_model>
+                </field>
+
+            </group>
+
+
+        </section>
+
+				<!--
+        <section id="import_report" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Report - Import M1->M2</label>
+            <tab>lm_importmagold</tab>
+            <resource>LM_Importmagold::import_report</resource>
+            <group id="customer" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Report import clienti M1->M2</label>
+                <frontend_model>LM\Importmagold\Block\Adminhtml\System\Config\Contenutoesterno</frontend_model>
+                <comment>Qui dovrebbe essere un contenuto della classe LM\Importmagold\Block\Adminhtml\System\Config\Contenutoesterno</comment>
+            </group>
+        </section>
+        -->
+
+
+								<!--
+                <comment><![CDATA[
+                <iframe id="lm-report-export" src="/others/LM/export_googleshopping.php?sicurezza=sono_io_tranqui_raga" frameborder="0" scrolling="no" width="100%" height="1700px" style="min-height: 800px;"></iframe>
+                ]]></comment>
+								-->
+
+        
+    </system>
+</config>

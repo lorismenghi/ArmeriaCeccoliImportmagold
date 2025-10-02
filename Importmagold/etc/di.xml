@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+
+    <type name="LM\Importmagold\Model\ResourceModel\ClientiImportati\CollectionFactory">
+        <arguments>
+            <argument name="entityType" xsi:type="string">LM\Importmagold\Model\ClientiImportati</argument>
+            <argument name="entityFactory" xsi:type="object">Magento\Framework\EntityManager\EntityFactory</argument>
+        </arguments>
+    </type>
+    <type name="LM\Importmagold\Model\ResourceModel\ProdottiImportati\CollectionFactory">
+        <arguments>
+            <argument name="entityType" xsi:type="string">LM\Importmagold\Model\ProdottiImportati</argument>
+            <argument name="entityFactory" xsi:type="object">Magento\Framework\EntityManager\EntityFactory</argument>
+        </arguments>
+    </type>
+
+		<!-- e' un controller non serve dichiarre i parametri
+    <type name="LM\Importmagold\Controller\Adminhtml\Report\ImportCliente">
+        <arguments>
+            <argument name="importCustomerService" xsi:type="object">LM\Importmagold\Model\ImportCustomerService</argument>
+        </arguments>
+    </type>
+    -->
+    <type name="LM\Importmagold\Cron\ImportCustomerCron">
+        <arguments>
+            <argument name="importCustomerService" xsi:type="object">LM\Importmagold\Model\ImportCustomerService</argument>
+        </arguments>
+    </type>    
+    <type name="LM\Importmagold\Cron\ImportProductCron">
+        <arguments>
+            <argument name="importProductService" xsi:type="object">LM\Importmagold\Model\ImportProductService</argument>
+        </arguments>
+    </type>    
+	<!--
+    <type name="LM\Importmagold\Block\Template">
+        <arguments>
+            <argument name="customTemplate" xsi:type="array">
+                <item name="context" xsi:type="string">\Magento\Framework\View\Element\Template\Context</item>
+                <item name="registry" xsi:type="string">\Magento\Framework\Registry</item>
+            </argument>
+        </arguments>
+    </type>
+	-->
+	
+	<!-- vecchio sistema in 2 chiamate, ma che fa un file troppo grosso
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="lm:importmagold:getprzqta" xsi:type="object">LM\Importmagold\Console\Command\GetprzqtaCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="lm:importmagold:sincprzqta" xsi:type="object">LM\Importmagold\Console\Command\SincprzqtaCommand</item>
+            </argument>
+        </arguments>
+    </type>
+  -->
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="lm:importmagold:getsincprzqta" xsi:type="object">LM\Importmagold\Console\Command\GetsincprzqtaCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="lm:importmagold:clearprzqta" xsi:type="object">LM\Importmagold\Console\Command\ClearprzqtaCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="lm:importmagold:getgenprod" xsi:type="object">LM\Importmagold\Console\Command\GetgenprodCommand</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="lm:importmagold:set-attribute-default" xsi:type="object">LM\Importmagold\Console\Command\ChangeAllToDefaultAttributeSet</item>
+            </argument>
+        </arguments>
+    </type>
+  <!--
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="lm:importmagold:sincgenprod" xsi:type="object">LM\Importmagold\Console\Command\SincgenprodCommand</item>
+            </argument>
+        </arguments>
+    </type>
+  -->
+</config>
+

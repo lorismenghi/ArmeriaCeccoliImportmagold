@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="LM_Importmagold::import_config" title="LM Configurazione Import Magento1 > Magento2"/>
+                            <resource id="LM_Importmagold::mexal_config" title="LM Configurazione MEXAL"/>
+                        </resource>
+                    </resource>
+                </resource>
+                
+                <resource id="LM_Importmagold::import_report" title="LM Report Magento1 > Magento2" sortOrder="10" />                
+                
+            </resource>
+        </resources>
+    </acl>
+</config>

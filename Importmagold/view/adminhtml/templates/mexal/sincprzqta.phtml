@@ -1,0 +1,26 @@
+<h1>Risultato sinc magento Articoli ricerca prz qta</h1>
+<div>
+    <h2>Conteggio degli Articoli: <?php echo $block->getData('conto_articoli'); ?></h2>
+
+   <p>
+		<?php
+		echo $block->getData('output');
+		?>
+    </p>
+
+    <p>
+		<?php
+		$importResult = $block->getData('importResult');
+		if (array_key_exists('message', $importResult)) {
+			echo $importResult['message'];
+			//echo $importResult['dettaglio_azioni'];
+		}
+		?>
+    </p>
+
+    <pre>
+    	<?php //print_r($block->getData('articoli_ricerca')); ?>
+    	<?php //print_r($block->getData('articoli_ricerca_filtrati')); ?>
+    </pre>
+</div>
+

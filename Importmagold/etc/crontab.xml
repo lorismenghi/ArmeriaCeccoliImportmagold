@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+
+
+  <group id="default">
+      
+        <job name="import_customer_cron" instance="LM\Importmagold\Cron\ImportCustomerCron" method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+        
+        
+        <job name="import_product_cron" instance="LM\Importmagold\Cron\ImportProductCron" method="execute">
+            <schedule>*/3 * * * *</schedule>
+        </job>
+       <!-- 
+
+        <job name="clear_mexal_import_product_cron" instance="LM\Importmagold\Cron\clearMexalImportProductCron" method="execute">
+            <schedule>0 * * * *</schedule>
+        </job>
+
+        <job name="rigenera_cache_progressivi_articoli" instance="LM\Importmagold\Cron\rigeneraCacheMexalImportProductCron" method="generaProgressiviArticoli">
+            <schedule>1 * * * *</schedule>
+        </job>
+
+        <job name="rigenera_cache_articoli_ricerca" instance="LM\Importmagold\Cron\rigeneraCacheMexalImportProductCron" method="generaArticoliRicerca">
+            <schedule>3 * * * *</schedule>
+        </job>
+
+        <job name="rigenera_cache_generale_articoli" instance="LM\Importmagold\Cron\rigeneraCacheMexalImportProductCron" method="generaGeneraleArticoli">
+            <schedule>5 * * * *</schedule>
+        </job>
+
+        <job name="rigenera_cache_select_articoli" instance="LM\Importmagold\Cron\rigeneraCacheMexalImportProductCron" method="generaSelectArticoli">
+            <schedule>10 * * * *</schedule>
+        </job>
+
+        <job name="sinc_gen_product_cron" instance="LM\Importmagold\Cron\SincGenProductCron" method="execute">
+            <schedule>15 * * * *</schedule>
+        </job>
+
+        <job name="sinc_prz_qta_product_cron" instance="LM\Importmagold\Cron\SincprzqtaProductCron" method="execute">
+            <schedule>20 * * * *</schedule>
+        </job>
+
+        
+        <job name="sinc_order_mexal_cron" instance="LM\Importmagold\Cron\InvioOrdineCron" method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+
+        -->
+
+
+  </group>
+</config>
+

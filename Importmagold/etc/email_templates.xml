@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Mail/etc/email_templates.xsd">
+    <template id="notifica_errore_template" label="Notifica Errore Mexal" file="mexal_notifica_errore.html" type="html" module="LM_Importmagold" area="frontend"/>
+</config>
+

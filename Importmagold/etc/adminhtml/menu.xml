@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+		<!-- blocco import da magento 1 -->
+        <add id="LM_Importmagold::lm_importmagold" title="Import M1->M2" module="LM_Importmagold" sortOrder="20" 
+        		parent="LM_Core::lm_all" resource="LM_Importmagold::import_config"/>
+
+        <add id="LM_Importmagold::import_config" title="Config - Import M1->M2" module="LM_Importmagold" sortOrder="30" 
+        		parent="LM_Importmagold::lm_importmagold" resource="LM_Importmagold::import_config"
+        		action="adminhtml/system_config/edit/section/import_config" />
+
+        <add id="LM_Importmagold::import_report" title="Report - Import M1->M2" module="LM_Importmagold" sortOrder="40" 
+        		parent="LM_Importmagold::import_config" resource="LM_Importmagold::import_config"
+        		action="lm_importmagold/report/index" />
+        		
+        		
+        		
+        		
+		<!-- blocco sincronizzazione Mexal -->
+        <add id="LM_Importmagold::lm_mexal" title="Mexal" module="LM_Importmagold" sortOrder="50" 
+        		parent="LM_Core::lm_all" resource="LM_Importmagold::mexal_config"/>
+
+        <add id="LM_Importmagold::mexal_config" title="Config - Mexal" module="LM_Importmagold" sortOrder="60" 
+        		parent="LM_Importmagold::lm_mexal" resource="LM_Importmagold::mexal_config"
+        		action="adminhtml/system_config/edit/section/mexal_config" />
+
+		<!-- troppi elementi in menu
+        <add id="LM_Importmagold::mexal_help" title="Help - Mexal" module="LM_Importmagold" sortOrder="70" 
+        		parent="LM_Importmagold::mexal_config" resource="LM_Importmagold::mexal_config"
+        		action="lm_importmagold/mexal/help" />
+
+        <add id="LM_Importmagold::mexal_gruppimerceologici" title="Gruppi merceologici - Mexal" module="LM_Importmagold" sortOrder="80" 
+        		parent="LM_Importmagold::mexal_config" resource="LM_Importmagold::mexal_config"
+        		action="lm_importmagold/mexal/gruppimerceologici" />
+		-->
+
+		<!--
+        <add id="LM_Importmagold::mexal_report" title="Report - Mexal" module="LM_Importmagold" sortOrder="100" 
+        		parent="LM_Importmagold::mexal_config" resource="LM_Importmagold::mexal_config"
+        		action="lm_importmagold/mexal/index" />
+		-->
+    </menu>
+</config>
+
+

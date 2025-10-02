@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<!--
+    <event name="admin_system_config_changed_section_pannelloexport_google">
+        <observer name="pannelloexport_google" instance="LM\Googleshopping\Observer\SavePannelloExportGoogle"/>
+    </event>
+	-->
+</config>

@@ -1,0 +1,18 @@
+{
+    "name": "lm/importmagold",
+    "description": "Magento 2 module per importare clienti e alcuni dati prodotto da Magento1",
+    "require": {
+        "php": "~7.4.0||~8.0.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "LM\\Importmagold\\": ""
+        }
+    }
+}
+

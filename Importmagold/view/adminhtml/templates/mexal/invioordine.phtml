@@ -1,0 +1,37 @@
+<?php
+$return_insert_cliente = $block->getData('return_insert_cliente');
+?>
+<h1>Risultato test invio ordine a Mexal</h1>
+<div>
+   <p>Id entity ultimo ordine Magento sincronizzato con Mexal: <strong><?php echo $block->getData('last_mag_order_id'); ?></strong>
+   <br/>Id entity prossimo ordine Magento da sincronizzare con Mexal: <strong><?php echo $block->getData('next_mag_order_id'); ?></strong>
+   </p>
+   <p>Customer Ordine Info: <pre><?php print_r($block->getData('customer_info')); ?></pre></p>
+   <p>Customer Mexal corrispondente Info: <pre><?php print_r($block->getData('cliente_mexal')); ?></pre></p>
+   
+   <?php if ( count($block->getData('cliente_mexal')) ): ?>
+   		<p>Customer Mexal trovato! codice: <?php echo $block->getData('cliente_mexal')['codice']; ?></p>
+   		
+   <?php else: ?>
+   		<p>Customer Mexal NON trovato!</p>
+   		<p>Invio quindi il cliente a Mexal</p>
+   		<?php if ( count($block->getData('cliente_mexal_2')) ): ?>
+   		<p>Customer Mexal inserito con codice: <?php echo $block->getData('cliente_mexal_2')['codice']; ?></p>
+   		<?php endif; ?>
+   <?php endif; ?>
+   
+   <p>Json inviato in inserimento ordine: <?php print_r($block->getData('orderJson')); ?></p>
+   <p>Risposta Mexal a invio ordine: <pre><?php print_r($block->getData('return_insert_order')); ?></pre></p>
+   
+   <p><?php echo $block->getData('messaggio_fine'); ?></p>
+   
+<?php /*  
+   <p>Nel caso che in Mexal il cliente non c'era lo inserisco</p>
+   <?php if ( is_array($return_insert_cliente) ): ?>
+   	<p>Mexal risponde con un array: <pre><?php print_r($return_insert_cliente); ?></pre></p>
+   <?php else: ?>
+   	<p>Mexal risponde con una stringa: <?php echo $return_insert_cliente; ?></p>
+   <?php endif; ?>
+*/ ?>
+</div>
+
