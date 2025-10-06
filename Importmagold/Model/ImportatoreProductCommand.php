@@ -845,12 +845,28 @@ class ImportatoreProductCommand extends Importatore
 		$this->output_terminale->writeln(print_r($data, true));
 		$this->output_terminale->writeln("###############");
 		}
-		if ( array_key_exists('mastersku', $data) && strlen(trim($data['mastersku'])) ) {
-			if ( is_object($output_terminale) ) {
-			$this->output_terminale->writeln("#STO PER LANCIARE createOrUpdateConfigurableProduct#");
-			}
-			$this->createOrUpdateConfigurableProduct($productM, trim($data['mastersku']));
-		}
+		
+		
+		//if ( array_key_exists('mastersku', $data) && strlen(trim($data['mastersku'])) ) {
+		//	if ( is_object($output_terminale) ) {
+		//	$this->output_terminale->writeln("#STO PER LANCIARE createOrUpdateConfigurableProduct#");
+		//	}
+		//	$this->createOrUpdateConfigurableProduct($productM, trim($data['mastersku']));
+		//}
+		
+                $hasMasterSku = array_key_exists('mastersku', $data) && strlen(trim($data['mastersku']));
+                if ($hasMasterSku) {
+                        $masterSku = trim($data['mastersku']);
+                        $this->detachSimpleFromConfigurables($productM, $masterSku);
+                        if ( is_object($output_terminale) ) {
+                        $this->output_terminale->writeln("#STO PER LANCIARE createOrUpdateConfigurableProduct#");
+                        }
+                        $this->createOrUpdateConfigurableProduct($productM, $masterSku);
+                } else {
+                        $this->detachSimpleFromConfigurables($productM);
+                }		
+		
+		
 	}
 
 
