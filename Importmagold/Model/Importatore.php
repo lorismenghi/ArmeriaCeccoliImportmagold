@@ -1181,6 +1181,88 @@ public function getOptionId($attributeCode, $label, $force = false)
 		return $configurableProduct;
 	}
 
+        /**
+         * Rimuove il prodotto semplice dalle eventuali associazioni configurabili
+         * opzionalmente preservando un determinato SKU padre.
+         */
+        public function detachSimpleFromConfigurables(\Magento\Catalog\Model\Product $simpleProduct, ?string $skuToKeep = null): bool
+        {
+                $simpleId = (int) $simpleProduct->getId();
+                if (!$simpleId) {
+                        return false;
+                }
+
+                $parentIds = $this->configurableProductType->getParentIdsByChild($simpleId);
+                if (empty($parentIds)) {
+                        return false;
+                }
+
+                $removedAny = false;
+
+                foreach ($parentIds as $parentId) {
+                        try {
+                                $parentProduct = $this->productRepository->getById($parentId, false, 0, true);
+                        } catch (\Exception $e) {
+                                $this->logger->error(sprintf('Impossibile caricare il configurabile %d per la rimozione del figlio %s: %s', $parentId, $simpleProduct->getSku(), $e->getMessage()));
+                                continue;
+                        }
+
+                        if ($skuToKeep !== null && $parentProduct->getSku() === $skuToKeep) {
+                                continue;
+                        }
+
+                        $typeInstance = $parentProduct->getTypeInstance();
+                        $usedProducts = $typeInstance->getUsedProducts($parentProduct);
+
+                        $remainingProducts = [];
+                        foreach ($usedProducts as $usedProduct) {
+                                if ((int) $usedProduct->getId() !== $simpleId) {
+                                        $remainingProducts[] = $usedProduct;
+                                }
+                        }
+
+                        if (count($remainingProducts) === count($usedProducts)) {
+                                continue;
+                        }
+
+                        $removedAny = true;
+
+                        $remainingIds = array_map(function ($product) {
+                                return (int) $product->getId();
+                        }, $remainingProducts);
+
+                        $parentProduct->unsetData('associated_product_ids');
+                        $parentProduct->setAssociatedProductIds($remainingIds);
+                        $parentProduct->setCanSaveConfigurableAttributes(true);
+
+                        if (!empty($remainingProducts)) {
+                                $configurableAttributesData = $this->getConfigurableAttributesForProduct($remainingProducts, $parentProduct);
+                                if (!empty($configurableAttributesData['ids'])) {
+                                        $typeInstance->setUsedProductAttributeIds($configurableAttributesData['ids'], $parentProduct);
+                                } else {
+                                        $typeInstance->setUsedProductAttributeIds([], $parentProduct);
+                                }
+                                $parentProduct->setConfigurableAttributesData($configurableAttributesData['data']);
+                        } else {
+                                $typeInstance->setUsedProductAttributeIds([], $parentProduct);
+                                $parentProduct->setConfigurableAttributesData([]);
+                        }
+
+                        $this->saveProductWithRetry($parentProduct);
+                        $this->logger->info(sprintf('Rimosso il semplice %s dal configurabile %s', $simpleProduct->getSku(), $parentProduct->getSku()));
+                }
+
+                if ($removedAny) {
+                        $remainingParents = $this->configurableProductType->getParentIdsByChild($simpleId);
+                        if (empty($remainingParents)) {
+                                $simpleProduct->setVisibility(self::MAGENTO_VISIBILITA_CATALOGO_RICERCA);
+                                $this->saveProductWithRetry($simpleProduct);
+                        }
+                }
+
+                return $removedAny;
+        }
+
 
 	public function OLD_createOrUpdateConfigurableProduct($simpleProduct, $skuConfigurabile)
 	{

@@ -88,6 +88,7 @@ class GetgenprodCommand extends Command
 			$next = ''; // mexal usa codice alfanumerico
 			$hasNext = true;
 			$array_response = ['dati'=>[]];
+			//$isResuming = file_exists($cacheFile) && file_exists($flagFilePath);
 			
 			// non carco piu in memoria la richiesta precedente
 			// se esiste un file cache parziale, mi carico la risposta in memoria
@@ -164,6 +165,7 @@ class GetgenprodCommand extends Command
 					$this->importProductMexalService->importProductGenerale($output, $generale_articoli_rielaborati);
 					$primo_giro = false;
 					$array_response = ['dati'=>[]];
+					//$isResuming = false;
 				    
 				} // fine while
 				
